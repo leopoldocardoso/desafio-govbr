@@ -38,4 +38,4 @@ terraform.rc
 
 # Other files that are commonly ignored
 ../../secrets
-
+*.txt

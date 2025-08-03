@@ -1,4 +1,4 @@
-name: terraform_destroy_github_action
+name: ACR and AKS Terraform Deploy
 
 env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}

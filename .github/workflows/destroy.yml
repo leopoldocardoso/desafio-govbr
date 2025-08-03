@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./modules/aks
+        working-directory: ./terraform/main-stack
     permissions:
         id-token: write
         contents: read

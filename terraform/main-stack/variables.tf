@@ -80,7 +80,7 @@ variable "user_node_name" {
 variable "node_count" {
   description = "The number of nodes in the default node pool in the AKS cluster."
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "azure_container_registry" {
@@ -91,7 +91,7 @@ variable "azure_container_registry" {
     admin_enabled = bool
   })
   default = {
-    name          = "ecrdesafiogovbr"
+    name          = "acrdesafiogovbr"
     sku           = "Basic"
     admin_enabled = false
   }

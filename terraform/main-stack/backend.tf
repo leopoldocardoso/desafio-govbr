@@ -4,6 +4,6 @@ terraform {
     storage_account_name = "iacdevterraformtfstate"
     container_name       = "container-iac"
     key                  = "desafio-govbr.tfstate"
-    
+
   }
 }

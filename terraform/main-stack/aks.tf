@@ -17,6 +17,7 @@ resource "azurerm_kubernetes_cluster" "aks_desafio_gov_br" {
     node_count     = var.node_count
     vm_size        = var.vm_size
     vnet_subnet_id = azurerm_subnet.snet_desafio_gov_br.id
+    zones = [1,2,3]
   }
 
   identity {

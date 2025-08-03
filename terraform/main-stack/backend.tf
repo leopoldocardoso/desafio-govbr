@@ -3,7 +3,7 @@ terraform {
     resource_group_name  = "rg-iac-terraform"
     storage_account_name = "iacdevterraformtfstate"
     container_name       = "container-iac"
-    key                  = "desafio-govbr.tfstate"
+    key                  = "desafio-gov-br.tfstate"
 
   }
 }

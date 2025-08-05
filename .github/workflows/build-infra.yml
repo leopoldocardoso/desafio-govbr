@@ -10,12 +10,9 @@ env:
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 jobs:
-  Create-ACR-Terraform:
+  Create-Infra-Terraform:
     name: Deploy Infra With Terraform in Azure
     runs-on: ubuntu-latest
     defaults:

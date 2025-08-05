@@ -1,4 +1,4 @@
-name: Destroy ACR and AKS With Terraform in Azure
+name: Destroy Observability Infra With Terraform in Azure
 
 env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./terraform/main-stack
+        working-directory: ./terraform/observability-stack
     permissions:
         id-token: write
         contents: read

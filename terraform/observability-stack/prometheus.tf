@@ -20,16 +20,16 @@ values = [
       prometheusSpec = {
         retention = var.prometheus_retention
         additionalScrapeConfigs = [
-          {
-            job_name = "nginx-metrics"  # ← Mudei o nome
-            static_configs = [
-              {
-                targets = ["nginx-exporter:9113"]  # ← Mudei aqui: era meu-website:80
-              }
-            ]
-            metrics_path = "/metrics"  # ← Mantém igual
-          }
-        ]
+  {
+    job_name = "meu-website"
+    static_configs = [
+      {
+        targets = ["meu-website:80"]  # ← Volta para o original
+      }
+    ]
+    metrics_path = "/metrics"
+  }
+]
         storageSpec = {
           volumeClaimTemplate = {
             spec = {

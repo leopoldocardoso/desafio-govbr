@@ -27,7 +27,7 @@ values = [
         targets = ["135.237.5.167:80"]  # ← Volta para o original
       }
     ]
-    # metrics_path = "/metrics"
+    metrics_path = "/metrics"
   }
 ]
         storageSpec = {

@@ -24,7 +24,7 @@ values = [
     job_name = "meu-website"
     static_configs = [
       {
-        targets = ["meu-website:80"]  # ← Volta para o original
+        targets = ["135.237.5.167:80"]  # ← Volta para o original
       }
     ]
     metrics_path = "/metrics"

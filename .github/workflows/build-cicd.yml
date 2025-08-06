@@ -1,0 +1,61 @@
+name: CI-CD
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+
+  ci-build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Login no Azure CLI
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+
+      - name: Login no Azure Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: acrdesafiogovbr.azurecr.io
+          username: ${{ secrets.ARM_CLIENT_ID }}
+          password: ${{ secrets.ARM_CLIENT_SECRET }}
+
+      - name: Build da imagem Docker
+        run: docker build -t acrdesafiogovbr.azurecr.io/meu-website:${{ github.sha }} .
+
+#       - name: Push da imagem para o ACR
+#         run: docker push acrdesafiogovbr.azurecr.io/meu-website:${{ github.sha }}
+#   cd-helm:
+#     runs-on: ubuntu-latest
+#     needs: [ci-build-and-push] # Garante que este job só rode após o CI ser concluído com sucesso
+#     steps:
+#       - name: Checkout do código
+#         uses: actions/checkout@v4
+
+#       - name: Login no Azure CLI
+#         uses: azure/login@v1
+#         with:
+#           client-id: ${{ secrets.ARM_CLIENT_ID }}
+#           tenant-id: ${{ secrets.ARM_TENANT_ID }}
+#           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+#           client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+
+#       - name: Configurar o contexto do AKS
+#         uses: azure/aks-set-context@v1
+#         with:
+#           resource-group: 'rg-desafio-gov-br' # Substitua pelo nome do Grupo de Recursos do seu AKS
+#           cluster-name: 'aks-desafio-gov-br' # Substitua pelo nome do seu cluster AKS
+
+#       - name: Instalar/Atualizar a aplicação com Helm
+#         run: |
+#           helm upgrade --install meu-website ./app-stack/meu-website \
+#             --set image.repository=acrdesafiogovbr.azurecr.io/meu-website \
+#             --set image.tag=${{ github.sha }} \
+#             --namespace meu-website

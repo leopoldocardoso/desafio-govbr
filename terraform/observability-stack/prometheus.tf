@@ -19,6 +19,17 @@ resource "helm_release" "prometheus" {
       prometheus = {
         prometheusSpec = {
           retention = var.prometheus_retention
+           additionalScrapeConfigs = [
+            {
+              job_name = "meu-website"
+              static_configs = [
+                {
+                  targets = ["meu-website:80"]
+                }
+              ]
+              metrics_path = "/metrics"
+            }
+          ]
           storageSpec = {
             volumeClaimTemplate = {
               spec = {

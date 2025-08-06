@@ -45,7 +45,7 @@ variable "prometheus_retention" {
 variable "prometheus_storage_size" {
   description = "Tamanho do storage do Prometheus"
   type        = string
-  default     = "50Gi"
+  default     = "10Gi"
 }
 
 variable "grafana_storage_size" {

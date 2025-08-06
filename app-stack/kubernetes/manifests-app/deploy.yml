@@ -1,0 +1,32 @@
+
+# Create namespace
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: meu-website
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meu-website
+  namespace: meu-website
+  labels:
+    app: meu-website
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: meu-website
+  template:
+    metadata:
+      labels:
+        app: meu-website
+    spec:
+      containers:
+      - name: meu-website
+        image: acrdesafiogovbr.azurecr.io/meu-website:v0.4
+        ports:
+        - containerPort: 80
+---

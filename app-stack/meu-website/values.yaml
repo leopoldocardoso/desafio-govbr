@@ -1,0 +1,14 @@
+
+replicaCount:  3
+
+image:
+  repository: acrdesafiogovbr.azurecr.io/meu-website
+  tag: v0.4
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 80
+
+createDeployment: true
+Values.createService: false

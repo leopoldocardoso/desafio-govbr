@@ -4,26 +4,31 @@ FROM nginx:alpine
 # O autor do Dockerfile (opcional)
 LABEL maintainer="peixoto.leopoldo@gmail.com"
 
+# Instalar wget para download do exporter
+RUN apk add --no-cache wget
+
+# Download e instalação do nginx-prometheus-exporter
+RUN wget https://github.com/nginxinc/nginx-prometheus-exporter/releases/download/v0.11.0/nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz \
+    && tar -xzf nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz \
+    && mv nginx-prometheus-exporter /usr/local/bin/ \
+    && rm nginx-prometheus-exporter_0.11.0_linux_amd64.tar.gz
+
 # Copie os arquivos do seu site para o diretório de serviço do NGINX
 COPY . /usr/share/nginx/html
 
 # Copie a configuração do nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Criar arquivo de métricas estático para laboratório do Prometheus
-RUN echo '# HELP http_requests_total Total HTTP requests' > /usr/share/nginx/html/metrics && \
-    echo '# TYPE http_requests_total counter' >> /usr/share/nginx/html/metrics && \
-    echo 'http_requests_total{method="GET",status="200"} 1234' >> /usr/share/nginx/html/metrics && \
-    echo 'http_requests_total{method="POST",status="200"} 456' >> /usr/share/nginx/html/metrics && \
-    echo '# HELP app_users_online Current online users' >> /usr/share/nginx/html/metrics && \
-    echo '# TYPE app_users_online gauge' >> /usr/share/nginx/html/metrics && \
-    echo 'app_users_online 42' >> /usr/share/nginx/html/metrics && \
-    echo '# HELP app_uptime_seconds Application uptime' >> /usr/share/nginx/html/metrics && \
-    echo '# TYPE app_uptime_seconds counter' >> /usr/share/nginx/html/metrics && \
-    echo 'app_uptime_seconds 86400' >> /usr/share/nginx/html/metrics
+# Criar script de inicialização
+RUN echo '#!/bin/sh' > /start.sh \
+    && echo 'nginx -g "daemon off;" &' >> /start.sh \
+    && echo 'sleep 5' >> /start.sh \
+    && echo 'nginx-prometheus-exporter -nginx.scrape-uri=http://localhost/nginx_status &' >> /start.sh \
+    && echo 'wait' >> /start.sh \
+    && chmod +x /start.sh
 
-# Exponha a porta 80 para o tráfego da web
-EXPOSE 80
+# Exponha as portas
+EXPOSE 80 9113
 
-# O comando para iniciar o NGINX quando o contêiner for iniciado
-CMD ["nginx", "-g", "daemon off;"]
+# Comando para iniciar ambos os serviços
+CMD ["/start.sh"]

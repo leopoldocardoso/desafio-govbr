@@ -10,9 +10,9 @@ env:
 
 on:
   workflow_dispatch:
-  # push:
-  #     branches:
-  #       - main
+  push:
+      branches:
+        - main
 jobs:
   Create-Observability-Terraform:
     name: Deploy Infra With Terraform in Azure

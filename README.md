@@ -33,3 +33,13 @@ az aks update \
 az ad sp create-for-rbac --name "my-github-actions-sp" --role acrpush --scopes /subscriptions/2783b349-a076-405b-b47a-90095f330d7c/resourceGroups/rg-desafio-gov-br/providers/Microsoft.ContainerRegistry/registries/acrdesafiogovbr
 ```
 
+## Atualização do service principal já existente
+
+- Caso já exista um service principal criado você pode atualizar com o comando abaixo
+
+```bash
+az role assignment create \
+  --assignee a4068654-5b21-4a09-9094-86794732ed5c \
+  --role acrpush \
+  --scope /subscriptions/2783b349-a076-405b-b47a-90095f330d7c/resourceGroups/rg-desafio-gov-br/providers/Microsoft.ContainerRegistry/registries/acrdesafiogovbr
+```

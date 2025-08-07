@@ -56,7 +56,7 @@ jobs:
           # client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
 
       - name: Configurar o contexto do AKS
-        uses: azure/aks-set-context@v1
+        uses: azure/aks-set-context@v3
         with:
           resource-group: 'rg-desafio-gov-br' # Substitua pelo nome do Grupo de Recursos do seu AKS
           cluster-name: 'aks-desafio-gov-br' # Substitua pelo nome do seu cluster AKS

@@ -21,7 +21,7 @@ jobs:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          # client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
 
 
       - name: Login no Azure Container Registry
@@ -36,8 +36,12 @@ jobs:
 
       - name: Push da imagem para o ACR
         run: docker push acrdesafiogovbr.azurecr.io/meu-website:${{ github.sha }}
+
   cd-helm:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     needs: [ci-build-and-push] # Garante que este job só rode após o CI ser concluído com sucesso
     steps:
       - name: Checkout do código
@@ -49,7 +53,7 @@ jobs:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          # client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
 
       - name: Configurar o contexto do AKS
         uses: azure/aks-set-context@v1

@@ -1,5 +1,4 @@
-
-replicaCount:  3
+replicaCount: 3
 
 image:
   repository: acrdesafiogovbr.azurecr.io/meu-website
@@ -8,7 +7,13 @@ image:
 
 service:
   type: LoadBalancer
-  port: 80
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+    - name: metrics
+      port: 9100
+      targetPort: 9100
 
 createDeployment: true
-Values.createService: false
+createService: false

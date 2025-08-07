@@ -58,7 +58,7 @@ jobs:
         uses: azure/aks-set-context@v3
         with:
           resource-group: ${{ secrets.ARM_RESOURCE_GROUP }}
-          cluster-name: ${{ secrets.ARM_CLUSTER-NAME }}
+          cluster-name: ${{ secrets.ARM_CLUSTER_NAME }}
 
       - name: Instalar/Atualizar a aplicação com Helm
         run: |

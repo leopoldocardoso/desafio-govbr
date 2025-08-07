@@ -11,11 +11,16 @@ az aks get-credentials --resource-group rg-desafio-gov-br --name aks-desafio-gov
 az acr login --name acrdesafiogovb
 ```
 
-## Criar a imagem
+## Criar a imagem(build) e enviar para o acr(push)
+
+**Docker build**
 
 ```bash
 docker build -t acrdesafiogovbr.azurecr.io/meu-website:v0.1 .
 
+**Docker push**
+
+docker push acrdesafiogovbr.azurecr.io/meu-website:v0.5
 ```
 
 ## Atualização do AKS para permitir o mesmo realizar push no ACR

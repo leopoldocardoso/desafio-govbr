@@ -43,23 +43,23 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-#       - name: Login no Azure CLI
-#         uses: azure/login@v1
-#         with:
-#           client-id: ${{ secrets.ARM_CLIENT_ID }}
-#           tenant-id: ${{ secrets.ARM_TENANT_ID }}
-#           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-#           client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+      - name: Login no Azure CLI
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.ARM_CLIENT_ID }}
+          tenant-id: ${{ secrets.ARM_TENANT_ID }}
+          subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
 
-#       - name: Configurar o contexto do AKS
-#         uses: azure/aks-set-context@v1
-#         with:
-#           resource-group: 'rg-desafio-gov-br' # Substitua pelo nome do Grupo de Recursos do seu AKS
-#           cluster-name: 'aks-desafio-gov-br' # Substitua pelo nome do seu cluster AKS
+      - name: Configurar o contexto do AKS
+        uses: azure/aks-set-context@v1
+        with:
+          resource-group: 'rg-desafio-gov-br' # Substitua pelo nome do Grupo de Recursos do seu AKS
+          cluster-name: 'aks-desafio-gov-br' # Substitua pelo nome do seu cluster AKS
 
-#       - name: Instalar/Atualizar a aplicação com Helm
-#         run: |
-#           helm upgrade --install meu-website ./app-stack/meu-website \
-#             --set image.repository=acrdesafiogovbr.azurecr.io/meu-website \
-#             --set image.tag=${{ github.sha }} \
-#             --namespace meu-website
+      - name: Instalar/Atualizar a aplicação com Helm
+        run: |
+          helm upgrade --install meu-website ./app-stack/meu-website \
+            --set image.repository=acrdesafiogovbr.azurecr.io/meu-website \
+            --set image.tag=${{ github.sha }} \
+            --namespace meu-website

@@ -32,7 +32,7 @@ jobs:
           password: ${{ secrets.ARM_CLIENT_SECRET }}
 
       - name: Build da imagem Docker
-        run: docker build -f app-stack/app/meu-website/Dockerfile -t acrdesafiogovbr.azurecr.io/meu-website:${{ github.sha }} 
+        run: docker build -f app-stack/app/meu-website/Dockerfile -t acrdesafiogovbr.azurecr.io/meu-website:${{ github.sha }} ./app-stack/app/meu-website
 
       - name: Push da imagem para o ACR
         run: docker push acrdesafiogovbr.azurecr.io/meu-website:${{ github.sha }}

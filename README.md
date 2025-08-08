@@ -17,9 +17,11 @@ az acr login --name acrdesafiogovb
 
 ```bash
 docker build -t acrdesafiogovbr.azurecr.io/meu-website:v0.1 .
+```
 
 **Docker push**
 
+```bash
 docker push acrdesafiogovbr.azurecr.io/meu-website:v0.5
 ```
 

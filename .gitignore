@@ -42,3 +42,8 @@ terraform.rc
 # Other files that are commonly ignored
 ../../secrets
 *.txt
+.infracost/
+
+docs/Explicação Detalhada - Configuração do Grafana.md
+docs/Explicação Detalhada - Configuração do Prometheus.md
+docs/observability_stack_guide.md

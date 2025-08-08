@@ -11,8 +11,10 @@ env:
 on:
   workflow_dispatch:
   push:
-      branches:
-        - main
+    branches:
+      - main
+    paths:
+      - terraform/observability-stack/*
 jobs:
   Create-Observability-Terraform:
     name: Deploy Infra With Terraform in Azure

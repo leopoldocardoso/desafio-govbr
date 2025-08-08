@@ -50,3 +50,29 @@ az role assignment create \
   --role acrpush \
   --scope /subscriptions/2783b349-a076-405b-b47a-90095f330d7c/resourceGroups/rg-desafio-gov-br/providers/Microsoft.ContainerRegistry/registries/acrdesafiogovbr
 ```
+
+## Comandos do Helm
+
+**Verificar se o chart é válido**
+
+```bash
+helm lint ./< nome do chart >
+```
+
+**Simular instalação sem aplicar no cluster**
+
+```bash
+helm install nome_release ./< nome do chart > --dry-run --debug
+```
+
+**Criar um novo chart**
+
+```bash
+helm create < nome do chart >
+```
+
+**Empacotar um chart**
+
+```bash
+helm package ./< nome do chart >
+```
